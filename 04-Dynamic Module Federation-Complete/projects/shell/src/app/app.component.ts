@@ -6,20 +6,17 @@ import { buildRoutes } from './utils/routes';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html'
+  templateUrl: './app.component.html',
 })
-export class AppComponent implements OnInit  {
-
+export class AppComponent implements OnInit {
   remotes: CustomRemoteConfig[] = [];
 
-  constructor(
-    private router: Router) {
-  }
+  constructor(private router: Router) {}
 
   async ngOnInit(): Promise<void> {
     const manifest = getManifest<CustomManifest>();
-    
-    // Hint: Move this to an APP_INITIALIZER 
+
+    // Hint: Move this to an APP_INITIALIZER
     //  to avoid issues with deep linking
     const routes = buildRoutes(manifest);
     this.router.resetConfig(routes);
@@ -27,4 +24,3 @@ export class AppComponent implements OnInit  {
     this.remotes = Object.values(manifest);
   }
 }
-
